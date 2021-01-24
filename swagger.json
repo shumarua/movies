@@ -1,0 +1,404 @@
+{
+  "swagger": "2.0",
+  "info": {
+  "version": "1.0.0",
+  "title": "Project KinoCMS",
+  "description": "Swagger, Node.js and Javascript"
+  },
+  "host": "wokr.okrain.net.ua",
+  "basePath": "/v1/",
+  "tags": [
+  {
+  "name": "Home",
+  "description": "Home page"
+  },
+  {
+    "name": "User",
+    "description": "users"
+  },
+  {
+    "name": "Admin",
+    "description": "Administrative section"
+  }
+  ],
+  "schemes": [
+  "https",
+  "http"
+  ],
+  "paths": {
+    "/main": {
+      "get": {
+        "tags": ["Home"],
+        "summary": "Get on Home page",
+        "responses": {
+          "200": {
+            "description": "Home page"
+          }
+        }
+      }
+    },
+    "/main/afisha": {
+      "get": {
+        "tags": ["Home"],
+        "summary": "Get all films",
+        "responses": {
+          "200": {
+            "description": "all films",
+            "schema": {
+              "$ref": "#/definitions/Films"
+            }
+          },
+          "404": {
+            "description": "Films not found"
+          }
+        }
+      }
+    },
+    "main/film/{filmId}": {
+      "get": {
+        "tags": ["Home"],
+        "summary": "Get film by id",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "description": "ID of film that needs to be fetched",
+            "type":"integer",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Films"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Film not found"
+          }
+        }
+      }
+    },
+    "/main/cinema/news": {
+      "get": {
+        "tags": ["Home"],
+        "summary": "Get all news",
+        "responses": {
+          "200": {
+            "description": "all news",
+            "schema": {
+              "$ref": "#/definitions/News"
+            }
+          },
+          "404": {
+            "description": "News not found"
+          }
+        }
+      }
+    },
+    "/main/cinema/news/{newsId}": {
+      "get": {
+        "tags": ["Home"],
+        "summary": "Get news by id",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID of news that needs to be fetched",
+            "type":"integer",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/News"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "News not found"
+          }
+        }
+      }
+    },
+    "/admin/films": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Get all films",
+        "responses": {
+          "200": {
+            "description": "all films",
+            "schema": {
+              "$ref": "#/definitions/Films"
+            }
+          },
+          "404": {
+            "description": "Films not found"
+          }
+        }
+      }
+    },
+    "admin/films/{filmId}": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Get film by id",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "description": "ID of film that needs to be fetched",
+            "type":"integer",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Films"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Film not found"
+          }
+        }
+      }
+    },
+    "/admin/news": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Get all news",
+        "responses": {
+          "200": {
+            "description": "all news",
+            "schema": {
+              "$ref": "#/definitions/News"
+            }
+          },
+          "404": {
+            "description": "News not found"
+          }
+        }
+      }
+    },
+    "/admin/news/{newsId}": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Get news by id",
+        "parameters": [
+          {
+            "name": "newsId",
+            "in": "path",
+            "description": "ID of news that needs to be fetched",
+            "type":"integer",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/News"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "News not found"
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get page register user",
+        "responses": {
+          "200": {
+            "description": "Registration page"
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "add new user",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "description": "User name create",
+            "type":"string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "User password create",
+            "type":"string",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "User created"
+          },
+          "400": {
+            "description": "Error: User with name ${userName} already used"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Logs user into the system",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "description": "User name create",
+            "type":"string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "User password create",
+            "type":"string",
+            "required": true
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+              }
+          },
+          "400": {
+            "description": "Invalid userName or password"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Logs out current logged in user session",
+        "parameters": [],        
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": {},
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Films": {
+      "required": [],
+      "properties": {
+        "films":{
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              },
+              "name": {
+                "type": "string"
+              },
+              "discription": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LoginUser": {
+      "required": {},
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "News": {
+      "required": [],
+      "properties": {
+        "news":{
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              },
+              "name": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  }
+  
